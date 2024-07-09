@@ -1,0 +1,71 @@
+%-------------------------------------------------------------------------------
+% 1-title.tex 
+% 
+% Файл титульного листа
+%
+% Автор шаблона: Гордеев Иван
+%-------------------------------------------------------------------------------
+
+\begin{center}
+\begin{minipage}{12cm}
+\begin{center}
+\textbf{\UniversityFirst} \\[-0.1cm]
+\end{center}
+\end{minipage}
+
+\textbf{\UniversitySecond} \\[-0.1cm]
+
+\textbf{Факультет \AuthorFaculty} \\[-0.1cm]
+
+Кафедра \AuthorDepartment \\[1.cm]
+
+\begin{figure}[H]
+\flushright
+\includegraphics[width=0.3\linewidth]{img/logo}
+\captionsetup{labelformat=empty}
+\caption{}
+\label{img:Logo}
+\end{figure}
+
+\large \textbf{ОТЧЕТ ПО ПРОИЗВОДСТВЕННОЙ ПРАКТИКЕ:} \\[0.1cm]
+
+\textbf{Научно-исследовательская работа} \\[0.1cm]
+
+\Title \\[4.cm]
+\end{center} 
+
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{flushright}
+
+\ifdefined\male
+{
+\small Выполнил: \\
+студент группы \AuthorGroup \\
+}
+\else
+{
+\small Выполнила: \\
+студентка группы \AuthorGroup \\
+}
+\fi
+
+\AuthorSecond\ \AuthorFirst\ \AuthorThird \\
+Руководитель: \\
+\SupervisorTitles,\ \SupervisorSecond\ \SupervisorInitials \\
+
+\rule{0.5\linewidth}{0.5pt}
+
+Рекомендуемая оценка: \\
+
+\rule{0.5\linewidth}{0.5pt}
+
+\end{flushright}
+\end{minipage}
+
+\vfill
+\begin{center} 
+\small{г. \City,\ \Year\ г.}
+\end{center} 
+
+\thispagestyle{empty}

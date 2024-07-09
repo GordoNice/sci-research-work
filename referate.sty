@@ -1,0 +1,255 @@
+%-------------------------------------------------------------------------------
+% referate.sty
+% 
+% Стилевой файл для шаблона НИР
+%
+% Автор шаблона: Гордеев Иван
+%-------------------------------------------------------------------------------
+\ProvidesPackage{referate}
+%-------------------------------------------------------------------------------
+% Common packages
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{mdframed}
+\usepackage[most]{tcolorbox}
+\usepackage{multicol}
+\usepackage[no-math]{fontspec} % Для шрифта (без него работает только английский)
+\usepackage{indentfirst} % Делает красную строку вначале каждого параграфа
+\usepackage[english,main=russian]{babel}
+\usepackage{perpage} % the perpage package to clear counter for 
+
+\usepackage[
+  bottom = 20mm,
+  top = 20mm,
+  left = 30mm,
+  right = 15mm
+]{geometry}  % Позволяет просто настраивать колонтитулы
+
+%-------------------------------------------------------------------------------
+% Maths
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools} % AMS
+\mathtoolsset{showonlyrefs=False}  % Показывать номера только у тех формул,
+% на которые есть ссылка в тексте
+\usepackage{array} % Матрицы
+\usepackage{braket} % Определяет бра- и кет-вектора, и среднее 
+\usepackage{dsfont} % Использовал для единичного оператора \mathds{1}
+%\usepackage{icomma}% В формулах не будет оступа если будет(3,1545).
+% Но не (3, 1545)
+
+%-------------------------------------------------------------------------------
+% Graphics
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{graphicx} % \includegraphics (.eps, jpeg, png etc.)
+\DeclareGraphicsExtensions{.jpg, .pdf, .eps, .png}
+
+%-------------------------------------------------------------------------------
+% Settings
+
+\setmainfont{Times New Roman}  % Set Times New Roman as main font
+\frenchspacing  % Пробелы из Европейской традиции 
+
+% ------------------------------------------------------------------------------
+% Format of text
+\usepackage{setspace}
+% \onehalfspacing
+% \doublespacing
+\setstretch{1.5}
+
+\setlength\parindent{15mm}
+\setlength{\parskip}{8pt}
+
+% ------------------------------------------------------------------------------
+% Gost
+\newlength\GostAfterTitleSkip    \setlength\GostAfterTitleSkip    {1.2ex}
+\newlength\GostBetweenTitleSkip  \setlength\GostBetweenTitleSkip  {1.8ex}
+
+\newlength\GostBeforTitleSkip    \setlength\GostBeforTitleSkip    {3.2ex}
+\newlength\GostBeforNoTitleSkip  \setlength\GostBeforNoTitleSkip  {1.0ex}
+\newlength\GostHTitleSpace       \setlength\GostHTitleSpace       {2mm}
+\newlength\GostTitleIndent       \setlength\GostTitleIndent    {\parindent}
+\newlength\Gost@ChapterIndent    \setlength\Gost@ChapterIndent{\GostTitleIndent}
+\newlength\Gost@MainChapterIndent\setlength\Gost@MainChapterIndent{\parindent}
+\newlength{\Gost@TitleDropSkip}
+ \setlength\Gost@TitleDropSkip{\GostBetweenTitleSkip}
+ \addtolength\Gost@TitleDropSkip{-\GostAfterTitleSkip}
+
+% ------------------------------------------------------------------------------
+% стиль всех заголовков, \normalfont оставлен
+\newcommand\GostTitleStyle{\normalfont\bfseries}
+\newcommand\Gost@MainChapterStyle{}
+\newcommand\Gost@ChapterStyle{\Gost@MainChapterStyle}
+
+% ------------------------------------------------------------------------------
+% Раздел ПРОБЛЕМЫ с extarticle!
+% \newcounter{chapter}
+% \renewcommand\thechapter{\@arabic\c@chapter}
+% \newcommand\chapter{%
+%  \clearpage%
+%  \if@figuresonchapter%
+%   \addtocounter{totalfigure}{\c@figure}\setcounter{figure}{0}%
+%  \fi%
+%  \if@tablesonchapter%
+%   \addtocounter{totaltable} {\c@table }\setcounter{table}{0}%
+%  \fi%
+%  \@startsection{chapter}{0}%
+%   {\Gost@ChapterIndent}{0mm}{\GostAfterTitleSkip}%
+%   {\GostTitleStyle\large\Gost@ChapterStyle}%
+% }
+% \newcommand*\chaptermark[1]{}
+% \newcommand\apart[2]{\chapter {#2\label{#1}}}
+% \newcommand\cpart[2]{\chapter*{#2\label{#1}}}
+
+% ------------------------------------------------------------------------------
+% Literature
+\usepackage[
+    backend=biber,% движок
+    bibencoding=utf8,% кодировка bib файла
+    sorting=none,  % настройка сортировки списка литературы
+    style=gost-numeric,% стиль цитирования и библиографии (по ГОСТ)
+    language=autobib,% получение языка из babel/polyglossia, default: autobib % если ставить autocite или auto, то цитаты в тексте с указанием страницы, получат указание страницы на языке оригинала
+    autolang=other,
+    otherlangs=true,
+    clearlang=true,% внутренний сброс поля language, если он совпадает с языком из babel/polyglossia
+    defernumbers=true,% нумерация проставляется после двух компиляций, зато позволяет выцеплять библиографию по ключевым словам и нумеровать не из большего списка
+    doi=false,
+    citestyle=gost-numeric,
+    bibstyle=gost-numeric,  % Список в конце с нумерацией
+    isbn=false,
+]{biblatex}
+    % sorting=nyt,  % sort name year title
+    % bibstyle=gost-footnote,  % Список в конце без нумерации
+    % style=gost-footnote,
+    % defernumbers=true,
+    % citestyle=gost-footnote-min,
+    % maxcitenames=1
+
+\renewcommand*{\gostmedialanguage}{}
+
+\addbibresource{literature.bib}
+% \addbibresource{author.bib}
+% \addbibresource{registered.bib}
+
+
+
+
+
+\usepackage{csquotes, xpatch}
+
+
+% To make russian sources first, langid = russian!
+% \DeclareSourcemap{
+%   \maps[datatype=bibtex]{
+%     \map{
+%       \step[fieldsource=langid, match=russian, final]
+%       \step[fieldset=presort, fieldvalue={a}]
+%     }
+%     \map{
+%       \step[fieldsource=langid, notmatch=russian, final]
+%       \step[fieldset=presort, fieldvalue={z}]
+%     }
+%   }
+% }
+
+
+
+% Bibliography font size
+\AtBeginBibliography{\small}
+
+% ------------------------------------------------------------------------------
+% Table of Contents
+\addto\captionsrussian{
+  \renewcommand{\contentsname}
+    {\center Содержание}  % To make title at center
+}
+
+% ------------------------------------------------------------------------------
+% Make dots everywhere in ToC
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\l@section}
+  {\hfil}
+  {\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
+  {}{}
+\makeatother
+
+% ------------------------------------------------------------------------------
+% Roman numerals with over- and underline
+
+\def\barroman#1{\sbox0{#1}\dimen0=\dimexpr\wd0+1pt\relax
+  \makebox[\dimen0]{\rlap{\vrule width\dimen0 height 0.06ex depth 0.06ex}%
+    \rlap{\vrule width\dimen0 height\dimexpr\ht0+0.03ex\relax 
+            depth\dimexpr-\ht0+0.09ex\relax}%
+    \kern.5pt#1\kern.5pt}}
+
+% \barroman{XIX} - to use
+
+% ------------------------------------------------------------------------------
+% These must be last!
+\usepackage[
+  bookmarks=true,
+  colorlinks=true,
+  unicode=true,
+  linktocpage=true,
+  urlcolor=black,
+  linkcolor=black,
+  anchorcolor=black,
+  citecolor=black,
+  menucolor=black,
+  filecolor=black]{hyperref}  % Format of various links
+
+\hypersetup{                          % Гиперссылки
+  unicode=true,                       % Русские буквы в мета PDF
+  pdftitle={НИР | \Title},  % Заголовок
+  pdfauthor={\AuthorFirst\ \AuthorSecond},          % Автор
+  pdfsubject={\Title},          % Тема
+  pdfcreator={\AuthorFirst\ \AuthorSecond},         % Создатель
+  pdfproducer={\LaTeX},               % Производитель
+  pdfkeywords={НИР\ \City\ \Year}, % Ключевые слова
+  % colorlinks=true,              % false: ссылки в рамках; true: цветные ссылки
+  % linkcolor=blue,               % внутренние ссылки
+  % citecolor=black,              % на библиографию
+  % filecolor=magenta,            % на файлы
+  % urlcolor=cyan                 % на URL
+}
+
+
+
+\usepackage[
+    locale = DE,
+    list-separator       = {;\,},
+    list-final-separator = {;\,},
+    list-pair-separator  = {;\,},
+    list-units           = single,
+    range-units          = single,
+    range-phrase={\text{\ensuremath{-}}},
+    ]{siunitx}
+
+\usepackage{booktabs}
+
+\usepackage{enumitem}
+
+
+% This allow to split text in cells
+\newcommand{\shiftcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+% \usepackage[
+%     locale = DE,
+%     list-separator       = {;\,},
+%     list-final-separator = {;\,},
+%     list-pair-separator  = {;\,},
+%     list-units           = single,
+%     range-units          = single,
+%     range-phrase={\text{\ensuremath{-}}},
+%     % quotient-mode        = fraction, % красивые дроби могут не соответствовать ГОСТ
+%     fraction-function    = \sfrac,
+%     separate-uncertainty,
+%     ]{siunitx}                % Размерности SI
+
+
+
+% \sisetup{inter-unit-product = \ensuremath{{}\cdot{}}, output-decimal-marker = {.}}
+% output-decimal-marker = {.} --- заменяет десятичный разделитель
+

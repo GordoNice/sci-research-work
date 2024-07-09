@@ -1,0 +1,53 @@
+%!TEX program = lualatex
+%-------------------------------------------------------------------------------
+% 0Main.tex
+% 
+% Главный файл НИР
+%
+% Автор шаблона: Гордеев Иван
+%-------------------------------------------------------------------------------
+
+% \documentclass[a4paper, 14pt]{extarticle}  % Увеличить шрифт до 14 можно так
+\documentclass[a4paper, 12pt]{article}
+
+% TODO command to highlight
+\newcommand\todo[1]{\textcolor{red}{#1}}  % использование: \todo{text}
+\usepackage{tabularx}
+\input{data}         % Основные сведения (здесь нужно изменить значения на свои)
+\usepackage{referate}  % Стилевой файл со всеми настройками
+% \MakePerPage{footnote}     % Нумерация начинается с каждой страницы заново
+% \MakePerPage{footcite}     % Нумерация начинается с каждой страницы заново
+%-------------------------------------------------------------------------------
+\begin{document} 
+
+%-------------------------------------------------------------------------------
+% Выбрать нужный титульный лист
+\include{sections/1-title}  % Титульный лист без логотипа
+% \include{sections/1-title_logo}  % Титульный лист с логотипом университета (img/logo.png)
+%-------------------------------------------------------------------------------
+
+\thispagestyle{empty}
+
+\setcounter{figure}{0}  % Скинуть счетчик после лого на титульнике
+
+\setstretch{1.}  % Изменить отступ для оглавления 
+\tableofcontents
+\setstretch{1.5}  % Далее в тексте должен быть полуторный отступ
+
+\addtocontents{toc}{~\hfill\textbf{Стр.}\par}  % Добавить Стр. в содержании
+\clearpage
+
+\include{sections/2-intro}  % Введение
+
+\include{sections/31-section-one-name}  % Раздел 1
+
+\include{sections/32-section-two-name}  % Раздел 2
+
+\include{sections/33-section-three-name}  % Раздел 3
+
+\include{sections/4-conclusion}  % Заключение
+
+\include{sections/5-biblio}  % Список литературы
+
+\end{document}
+%-------------------------------------------------------------------------------
